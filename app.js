@@ -29,8 +29,8 @@ app.get('/', (req, res) => {
 
 var collegeArray = [];
 var uName;
-
-app.post("/university", (req, res) => {
+ 
+app.post("/university", (req, res) => { //just changing value of pagetitle
 
     uName = req.body.uName;
 
