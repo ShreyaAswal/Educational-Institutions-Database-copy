@@ -1,28 +1,28 @@
-const express = require("express");
-const pool = require(__dirname + '/database.js');
-const ejs = require("ejs");
+const express = require("express");  //setting the environment
+const pool = require(__dirname + '/database.js'); //connecting database
+const ejs = require("ejs"); ////setting ejs in the environment
 //const ejsLint = require("ejs-lint");
 
-const app = express();
+const app = express(); //creating an object of express
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
-app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true }));  //
+app.use(express.static("public")); //backend cannot load static files like css and images while running so we set public folder as stactic 
+app.set('view engine', 'ejs');  //set veiw engine on ejs, view engine =ejs
 
-var univArray = [];
+var univArray = []; 
 
 app.get('/', (req, res) => {
 
     univArray = [];
 
-    pool.query("SELECT * FROM university", (err, result) => {
+    pool.query("SELECT * FROM university", (err, result) => { //all universities database is in reult
         if (err) {
             console.log(err);
         } else {
             for (var i = 0; i < result.length; i++) {
-                univArray.push(result[i].UNAME);
+                univArray.push(result[i].UNAME); //university name in univarray
             }
-            res.render('home', { pageTitle: "Home", universityList: univArray });
+            res.render('home', { pageTitle: "Home", universityList: univArray }); 
         }
     });
 });
@@ -111,7 +111,7 @@ app.post("/college", (req, res) => {
                 grade = result1[0].GRADE;
                 rank = result1[0].RANK;
             }
-            const query5 = "SELECT CNAME,FEES_PER_ANNUM FROM course,offers,college WHERE AFFILIATION_NUMBER=AFF_NUM AND COURSE_NUM=PAPER_CODE AND COLLEGE_NAME LIKE '%" + cName + "%'";
+            const query5 = "SELECT CNAME //course name,FEES_PER_ANNUM FROM course,offers,college WHERE AFFILIATION_NUMBER=AFF_NUM AND COURSE_NUM=PAPER_CODE AND COLLEGE_NAME LIKE '%" + cName + "%'";
 
             pool.query(query5, (err, result) => {
                 if (err) {
