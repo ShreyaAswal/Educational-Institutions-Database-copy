@@ -1,12 +1,12 @@
-const express = require("express");  //setting the environment
+ const express = require("express");  //setting the environment
 const pool = require(__dirname + '/database.js'); //connecting database
 const ejs = require("ejs"); ////setting ejs in the environment
 //const ejsLint = require("ejs-lint");
 
 const app = express(); //creating an object of express
 
-app.use(express.urlencoded({ extended: true }));  //
-app.use(express.static("public")); //backend cannot load static files like css and images while running so we set public folder as stactic 
+app.use(express.urlencoded({ extended: true }));  //it encodes the url which needed encoding like for spacebar etc
+app.use(express.static("public")); //backend cannot load static files like css and images while running so we set public folder as stactic (MIME error)
 app.set('view engine', 'ejs');  //set veiw engine on ejs, view engine =ejs
 
 var univArray = []; 
